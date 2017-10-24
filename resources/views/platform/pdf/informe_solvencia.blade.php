@@ -38,7 +38,11 @@
 <h3 class="centrar">
 	@if ($sede_id == 1)
 		Colegio de Informatica Sinai
-	 @endif
+	@elseif($sede_id == 2)
+
+	@elseif($sede_id == 3)
+		
+	@endif
 </h3>
 <p class="centrar">Informe de Solvencia</p>
 <br>
