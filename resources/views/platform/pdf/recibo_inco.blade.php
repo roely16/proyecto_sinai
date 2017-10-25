@@ -43,12 +43,12 @@
 		<td colspan="2">Res. Ministerial</td>
 	</tr>
 	<tr>
-		<td colspan="2">No. 462-2002 AF</td>
-		<td colspan="2">No. 462-2002 AF</td>
+		<td colspan="2">No. 140-2012</td>
+		<td colspan="2">No. 140-2012</td>
 	</tr>
 	<tr>
-		<td colspan="2">Nit: 755770-1</td>
-		<td colspan="2">Nit: 755770-1</td>
+		<td colspan="2">Nit: 4714796-2</td>
+		<td colspan="2">Nit: 4714796-2</td>
 	</tr>
 	<tr class="big">
 		<td colspan="2">Nombre: </td>

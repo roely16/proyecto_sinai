@@ -52,16 +52,16 @@
 	<thead>
 		<tr>
 			<th>Nombre del alumno</th>
-			<th>Enero</th>
-			<th>Febrero</th>
-			<th>Marzo</th>
-			<th>Abril</th>
-			<th>Mayo</th>
-			<th>Junio</th>
-			<th>Julio</th>
-			<th>Agosto</th>
-			<th>Septiembre</th>
-			<th>Octubre</th>
+			<th>Ene</th>
+			<th>Feb</th>
+			<th>Mar</th>
+			<th>Abr</th>
+			<th>May</th>
+			<th>Jun</th>
+			<th>Jul</th>
+			<th>Ago</th>
+			<th>Sep</th>
+			<th>Oct</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -69,6 +69,7 @@
 
 			<tr>
 				<td class="fila">{{ $alumno->nombre}} {{ $alumno->segundo_nombre}} {{ $alumno->apellido }} {{ $alumno->segundo_apellido}}</td>
+				
 				<td></td>
 				<td></td>
 				<td></td>

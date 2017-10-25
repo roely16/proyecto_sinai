@@ -52,7 +52,7 @@
 							<label for="nombre">Ciclo Escolar</label>
 						</div>
 						<div class="input-field col l3">
-							<input type="text" placeholder="" readonly>
+							<input type="text" placeholder="" value="{{ $numero_alumnos }}" readonly>
 							<label for="">Número de Alumnos</label>
 						</div>
 						<div class="input-field col l3">

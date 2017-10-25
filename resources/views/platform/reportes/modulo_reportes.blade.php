@@ -23,7 +23,9 @@
 		<div class="col l6 center">
 			<h5 class="center">Reportes Administrativos</h5>
 			<a href="#modal_hoja_asistencia" class="waves-effect waves-light btn modal-trigger">Hoja de Asistencia</a>
+			<!--  	
 			<a href="#modal_alumnos_solventes" class="waves-effect waves-light btn modal-trigger">Alumnos Solventes</a>
+			-->
 		</div>
 	</div>
 
@@ -156,7 +158,14 @@
 										@elseif($grado->nivel_id == 4)
 											Diversificado / 
 										@endif
-										{{ $grado->seccion }}
+										@if ($grado->jornada_id == 1)
+										 	Jornada Matutina /
+										@elseif($grado->jornada_id == 2)
+											Jornada Fin de Semana
+										@elseif($grado->jornada_id == 3)
+											Jornada Vespertina
+										@endif 
+										Sección {{ $grado->seccion }}
 									</option>
 								
 	  							@endforeach
@@ -170,6 +179,7 @@
   			</div>
   		</form>
   	</div>	
+
 
 	<div id="modal_alumnos_solventes" class="modal modal-fixed-footer">
   		<form action="{{ route('reportes.alumnos_solventes')}}" method="POST">

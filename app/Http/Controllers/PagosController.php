@@ -52,8 +52,11 @@ class PagosController extends Controller
         if ($alumno->sede_id == 1) {
             $pagos_realizados = Pago_Alumno::where('alumno_id', '=', $alumno->id)->where('pago_id', '!=', null)->pluck('pago_id');    
         }elseif($alumno->sede_id == 2){
+
             $pagos_realizados = Pago_Alumno_Piedra::where('alumno_id', '=', $alumno->id)->where('pago_id', '!=', null)->pluck('pago_id');
-        }elseif($alumno->sede_id == 2){
+
+        }elseif($alumno->sede_id == 3){
+
             $pagos_realizados = Pago_Alumno_Inco::where('alumno_id', '=', $alumno->id)->where('pago_id', '!=', null)->pluck('pago_id');
         }        
 

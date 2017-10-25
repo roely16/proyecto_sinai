@@ -12,6 +12,7 @@ use Carbon\Carbon;
 
 use App\Alumno;
 use App\Grado;
+use App\Pago_Alumno;
 use Barryvdh\DomPDF\Facade as PDF;
 
 class ReporteController extends Controller
@@ -125,7 +126,15 @@ class ReporteController extends Controller
 
 		$usuario = Auth::user();
 
-		$alumnos = Alumno::where('grado_id', '=', $request->grado_id)->orderBy('id', 'ASC')->get();
+		$grado = Grado::find($request->grado_id);
+		
+
+		if ($usuario->empleado->sede_id == 1) {
+
+			$alumnos = Alumno::where('grado_id', '=', $request->grado_id)->orderBy('id', 'ASC')->with('pagos_alumno_canalitos')->get();	
+		}
+
+		dd($alumnos);
 
 		$grado = Grado::find($request->grado_id);
 

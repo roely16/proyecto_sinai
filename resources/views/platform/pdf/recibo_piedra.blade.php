@@ -23,8 +23,8 @@
 </style>
 <table style="width: 100%" class="main">
 	<tr style="text-align: center">
-		<td colspan="2" class="negrita titulo">Colegio Tecnologico Sinai</td>
-		<td colspan="2" class="negrita titulo">Colegio Tecnologico Sinai</td>
+		<td colspan="2" class="negrita titulo">Colegio Tecnológico Sinai</td>
+		<td colspan="2" class="negrita titulo">Colegio Tecnológico Sinai</td>
 	</tr>
 	<tr style="text-align: center">
 		<td colspan="2">Calle Principal Esquina Lote 88 "A" Zona 6</td>
@@ -43,12 +43,12 @@
 		<td colspan="2">Res. Ministerial</td>
 	</tr>
 	<tr>
-		<td colspan="2">No. 462-2002 AF</td>
-		<td colspan="2">No. 462-2002 AF</td>
+		<td colspan="2">No. 338-2011</td>
+		<td colspan="2">No. 338-2011</td>
 	</tr>
 	<tr>
-		<td colspan="2">Nit: 755770-1</td>
-		<td colspan="2">Nit: 755770-1</td>
+		<td colspan="2">Nit: 8016660-1</td>
+		<td colspan="2">Nit: 8016660-1</td>
 	</tr>
 	<tr class="big">
 		<td colspan="2">Nombre: </td>

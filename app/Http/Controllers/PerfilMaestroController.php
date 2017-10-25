@@ -23,28 +23,12 @@ class PerfilMaestroController extends Controller
 	 public function mis_cursos(){
 		$user = Auth::user();
 
-		//Si el grado es de primaria
-		$grados = Grado::where('maestro_id', $user->empleado_id)->get();
-
-		foreach ($grados as $grado) {
-		  $grado->grado_pred;
-		  $grado->grado_pred->nivel;
-
-		  //$grado->cursos->where('maestro_id', '=', $user->empleado_id);
-
-		  foreach ($grado->cursos->where('maestro_id', '=', $user->empleado_id) as $curso) {
-			 $curso->curso_pred;
-		  }
-
-		}
-
-		$cursos = Curso::where('maestro_id', '=', $user->empleado_id)->get();
+		$cursos = Curso::where('maestro_id', '=', $user->empleado_id)->orderBy('id', 'DESC')->paginate(5);
 
 		//dd($cursos);
 
 		return view('platform.maestro.mis_cursos')->with([
-		  'grados' => $grados,
-		  'cursos'	=>	$cursos
+		  'cursos'	=>	$cursos,
 		]);
 
 	 }

@@ -18,6 +18,7 @@
 				<tr>
 					<th>Curso</th>
 					<th>Grado</th>
+					<th>Ciclo</th>
 					<th>Acción</th>
 				</tr>
 			</thead>
@@ -27,6 +28,7 @@
 						<td></td>
 						<td>-- Aun no tiene cursos asignados --</td>
 						<td></td>
+						<td></td>
 					</tr>
 				@else
 					@foreach ($cursos as $curso)
@@ -34,6 +36,7 @@
 						<tr>
 							<td>{{ $curso->curso_pred->nombre }}</td>
 							<td>{{ $curso->grado->grado_pred->nombre }} {{ $curso->grado->grado_pred->nivel->nombre }} / Sección {{ $curso->grado->seccion }} / Jornada {{ $curso->grado->jornada->nombre }}</td>
+							<td>{{ $curso->grado ->ciclo_escolar }}</td>
 							<td>
 								<a href="{{ route('maestro.ver_curso', $curso->id) }}" class="btn">Acceder
 									<i class="material-icons right">send</i>
@@ -48,4 +51,9 @@
 		</table>
 		
 	</div>
+
+	<div class="row center">
+		{{ $cursos->links() }}
+	</div>
+
 @endsection

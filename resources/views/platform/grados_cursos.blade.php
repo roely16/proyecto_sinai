@@ -85,6 +85,8 @@
 									Matutina
 								@elseif($grado->jornada_id == 2)
 									Fin de Semana
+								@elseif($grado->jornada_id == 3)
+									Vespertina
 								@endif
 							</td>
 							<td>

@@ -34,11 +34,15 @@ class Alumno extends Model
 
 	 public function pagos()
 	 {
-		  return $this->hasMany('App\Pagos');
+		 return $this->hasMany('App\Pago');
 	 }
 
 	 public function reportes(){
-			return $this->hasMany('App\Reporte');
+		return $this->hasMany('App\Reporte');
+	 }
+
+	 public function pagos_alumno_canalitos(){
+	 	return $this->hasMany('App\Pago_Alumno');
 	 }
 
 }

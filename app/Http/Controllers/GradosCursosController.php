@@ -12,6 +12,7 @@ use App\Empleado;
 use App\Curso_Pred;
 use App\Curso;
 use App\Nivel;
+use App\Alumno;
 
 class GradosCursosController extends Controller
 {
@@ -117,6 +118,8 @@ class GradosCursosController extends Controller
 
 			$cursos = $grado->cursos;
 
+			$numero_alumnos = Alumno::where('grado_id', '=', $id)->count();
+
 			foreach ($cursos as $curso) {
 				$curso->maestro;
 				$curso->curso_pred;
@@ -127,7 +130,8 @@ class GradosCursosController extends Controller
 			return view('platform.show_grado')->with([
 				'grado' => $grado,
 				'cursos' => $cursos,
-				'maestros' => $maestros
+				'maestros' => $maestros,
+				'numero_alumnos'	=>	$numero_alumnos
 			]);
 
 		}
