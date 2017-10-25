@@ -77,7 +77,6 @@
 		</div>
 	</div>
 
-	<!--  
 	@if (Auth::user()->tipo_usuario_id == 1)
 		<div class="col s12 l6">
 			<h5 class="header">Pagos</h5>
@@ -96,7 +95,6 @@
 			</div>
 		</div>		
 	@endif
-	-->
 
 </div>
 

@@ -118,7 +118,7 @@ class ReporteController extends Controller
 		])->setPaper('letter', 'landscape')->setWarnings(false);
 
 
-		return $pdf->stream('asistencia.pdf');
+		return $pdf->download('asistencia.pdf');
 
 	}
 

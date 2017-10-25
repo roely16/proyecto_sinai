@@ -51,6 +51,7 @@
 		   							<thead>
 		   								<tr>
 		   									<th>Nombre</th>
+		   									<th>Punteo</th>
 		   									<th>Fecha de Entrega</th>
 		   									<th>Acción</th>
 		   								</tr>
@@ -59,14 +60,13 @@
 		   								@foreach($tareas_1 as $tarea)
 												<tr>
 											  		<td>{{ $tarea->nombre }}</td>
+											  		<td>{{ $tarea->punteo }} Puntos</td>
 											  		<td>{{ $tarea->fecha_entrega }}</td>
 											  		<td>
-														<a href="{{ route('maestro.entregas_tarea',$tarea->id) }}" class="btn green">
+														<a title="Calificar Tarea" href="{{ route('maestro.entregas_tarea',$tarea->id) }}" class="btn green">
 															<i class="material-icons">assignment</i>
 														</a>
-														<a href="#" class="btn red">
-															<i class="material-icons">delete</i>
-														</a>
+
 											  		</td>
 												</tr>
 										 	@endforeach
@@ -88,6 +88,7 @@
 		   							<thead>
 		   								<tr>
 		   									<th>Nombre</th>
+		   									<th>Punteo</th>
 		   									<th>Fecha de Entrega</th>
 		   									<th>Acción</th>
 		   								</tr>
@@ -96,14 +97,13 @@
 		   								@foreach($tareas_2 as $tarea)
 												<tr>
 											  		<td>{{ $tarea->nombre }}</td>
+											  		<td>{{ $tarea->punteo }} Puntos</td>
 											  		<td>{{ $tarea->fecha_entrega }}</td>
 											  		<td>
-														<a href="{{ route('maestro.entregas_tarea',$tarea->id) }}" class="btn green">
+														<a title="Calificar Tarea" href="{{ route('maestro.entregas_tarea',$tarea->id) }}" class="btn green">
 															<i class="material-icons">assignment</i>
 														</a>
-														<a href="#" class="btn red">
-															<i class="material-icons">delete</i>
-														</a>
+														
 											  		</td>
 												</tr>
 										 	@endforeach
@@ -125,6 +125,7 @@
 		   							<thead>
 		   								<tr>
 		   									<th>Nombre</th>
+		   									<th>Punteo</th>
 		   									<th>Fecha de Entrega</th>
 		   									<th>Acción</th>
 		   								</tr>
@@ -133,14 +134,13 @@
 		   								@foreach($tareas_3 as $tarea)
 												<tr>
 											  		<td>{{ $tarea->nombre }}</td>
+											  		<td>{{ $tarea->punteo }} Puntos</td>
 											  		<td>{{ $tarea->fecha_entrega }}</td>
 											  		<td>
-														<a href="{{ route('maestro.entregas_tarea',$tarea->id) }}" class="btn green">
+														<a title="Calificar Tarea" href="{{ route('maestro.entregas_tarea',$tarea->id) }}" class="btn green">
 															<i class="material-icons">assignment</i>
 														</a>
-														<a href="#" class="btn red">
-															<i class="material-icons">delete</i>
-														</a>
+														
 											  		</td>
 												</tr>
 										 	@endforeach
@@ -162,6 +162,7 @@
 		   							<thead>
 		   								<tr>
 		   									<th>Nombre</th>
+		   									<th>Punteo</th>
 		   									<th>Fecha de Entrega</th>
 		   									<th>Acción</th>
 		   								</tr>
@@ -170,14 +171,13 @@
 		   								@foreach($tareas_4 as $tarea)
 												<tr>
 											  		<td>{{ $tarea->nombre }}</td>
+											  		<td>{{ $tarea->punteo }} Puntos</td>
 											  		<td>{{ $tarea->fecha_entrega }}</td>
 											  		<td>
-														<a href="{{ route('maestro.entregas_tarea',$tarea->id) }}" class="btn green">
+														<a title="Calificar Tarea" href="{{ route('maestro.entregas_tarea',$tarea->id) }}" class="btn green">
 															<i class="material-icons">assignment</i>
 														</a>
-														<a href="#" class="btn red">
-															<i class="material-icons">delete</i>
-														</a>
+														
 											  		</td>
 												</tr>
 										 	@endforeach
