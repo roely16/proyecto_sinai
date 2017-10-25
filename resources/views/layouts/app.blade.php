@@ -65,7 +65,7 @@
                 <li><a class="dropdown-button" href="#!" data-activates="dropdown2">Niveles<i class="material-icons right">arrow_drop_down</i></a></li>
                 <li><a href="/jornadas">Jornadas</a></li>
                 <li><a href="/requisitos">Admisiones</a></li>
-                <li><a href="/login">Plataforma</a></li>
+                <li><a target="_blank" href="/login">Plataforma</a></li>
             </ul>
 
             <ul id="nav-mobile" class="side-nav">
@@ -74,7 +74,7 @@
                 <li><a class="dropdown-button light-blue-text text-darken-4" href="#!" data-activates="dropdown2-mobile">Estructura Escolar<i class="material-icons right light-blue-text text-darken-4">arrow_drop_down</i></a></li>
                 <li><a class="dropdown-button light-blue-text text-darken-4" href="#!" data-activates="dropdown3-mobile">Jornadas<i class="material-icons right light-blue-text text-darken-4">arrow_drop_down</i></a></li>
                 <li><a class="dropdown-button light-blue-text text-darken-4" href="#!" data-activates="dropdown4-mobile">Admisiones<i class="material-icons right">arrow_drop_down</i></a></li>
-                <li><a class="light-blue-text text-darken-4" href="/login">Plataforma</a></li>
+                <li><a target="_blank" class="light-blue-text text-darken-4" href="/login">Plataforma</a></li>
             </ul>
 
             <a href="#" data-activates="nav-mobile" class="button-collapse">

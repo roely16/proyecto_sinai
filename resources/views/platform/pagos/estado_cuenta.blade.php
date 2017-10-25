@@ -53,6 +53,7 @@
 								<tr>
 									<th>Concepto</th>
 									<th>Monto</th>
+									<th>Recibo</th>
 									<th>Fecha</th>
 								</tr>
 							</thead>
@@ -62,6 +63,7 @@
 										<tr>
 											<td>{{ $pago->concepto }}</td>
 											<td>Q {{ $pago->monto }}.00</td>
+											<td>No. {{ $pago->recibo_id }}</td>
 											<td>{{ $pago->created_at }}</td>
 										</tr>
 									@endforeach
@@ -73,6 +75,10 @@
 							</tbody>
 						</table>
 					</div>
+				</div>
+
+				<div class="row center">
+					{{ $pagos->links() }}
 				</div>
 			</div>
 		</div>

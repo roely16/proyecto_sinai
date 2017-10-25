@@ -356,7 +356,7 @@ class PagosController extends Controller
 
         if ($alumno->sede_id == 1) {
             
-            $pagos = Pago_Alumno::where('alumno_id', '=', $alumno->id)->orderBy('id', 'DESC')->get();
+            $pagos = Pago_Alumno::where('alumno_id', '=', $alumno->id)->orderBy('id', 'DESC')->paginate(5);
 
             return view('platform.pagos.estado_cuenta')->with([
                 'alumno'    =>  $alumno,
@@ -364,14 +364,14 @@ class PagosController extends Controller
             ]);
 
         }elseif($alumno->sede_id == 2){
-            $pagos = Pago_Alumno_Piedra::where('alumno_id', '=', $alumno->id)->orderBy('id', 'DESC')->get();
+            $pagos = Pago_Alumno_Piedra::where('alumno_id', '=', $alumno->id)->orderBy('id', 'DESC')->paginate(5);
 
             return view('platform.pagos.estado_cuenta')->with([
                 'alumno'    =>  $alumno,
                 'pagos'     =>  $pagos
             ]);
         }elseif($alumno->sede_id == 3){
-            $pagos = Pago_Alumno_Inco::where('alumno_id', '=', $alumno->id)->orderBy('id', 'DESC')->get();
+            $pagos = Pago_Alumno_Inco::where('alumno_id', '=', $alumno->id)->orderBy('id', 'DESC')->paginate(5);
 
             return view('platform.pagos.estado_cuenta')->with([
                 'alumno'    =>  $alumno,

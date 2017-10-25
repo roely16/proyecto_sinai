@@ -89,7 +89,7 @@
 		<div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
 			<header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
 				<div class="mdl-layout__header-row">
-					<span class="mdl-layout-title">Plataforma 1.0 - 
+					<span class="mdl-layout-title"> 
 
 						@if (Auth::user()->tipo_usuario_id == 1)
 
