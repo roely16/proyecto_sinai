@@ -9,7 +9,7 @@ class Recibo_Inco extends Model
     protected $table = 'recibos_inco';
 
 	protected $fillable = [
-		'fecha', 'total', 'alumno_id',
+		'fecha', 'total', 'alumno_id', 'serie',
 	];
 
 	public function pagos()

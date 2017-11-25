@@ -4,7 +4,7 @@ $('#agregar_otro_pago').click(function(event){
 	const otro = $('#concepto_pago').val()
 	const monto = $('#monto_pago').val()
 
-	$("#pagos").find('tbody')
+	$("#pagos2").find('tbody')
 		.append($('<tr>')
 			.append($('<td>')
 				.append(otro)
@@ -14,7 +14,7 @@ $('#agregar_otro_pago').click(function(event){
 			)
 		)
 
-	$("#pagos").find('tbody')
+	$("#pagos2").find('tbody')
 		.append($('<tr style="display:none;">')
 			.append($('<td>')
 				.append('<input type="hidden" value="'+ otro +'"  name="concepto_otro[]" readonly>')
@@ -24,19 +24,19 @@ $('#agregar_otro_pago').click(function(event){
 			)
 		)
 
-		$( "#botones_recibo" ).show()
+		$( "#botones_recibo2" ).show()
 
-	if ($('#fila_total').length == 0) {
+	if ($('#fila_total2').length == 0) {
 		
 		console.log('no existe la fila de total, colocarla y los botones de procesar y limpiar')
 		
-		$("#pagos").find('tfoot')
-			.append($('<tr id="fila_total">')
+		$("#pagos2").find('tfoot')
+			.append($('<tr id="fila_total2">')
 				.append($('<td>')
-					.append('<input type="hidden" value="'+monto+'" id="total" name="total" readonly>')
+					.append('<input type="hidden" value="'+monto+'" id="total2" name="total" readonly>')
 					.append('<b>Total a pagar</b>')
 				)
-				.append($('<td id="monto_total">')
+				.append($('<td id="monto_total2">')
 					.append($('#monto_pago').val())
 				)
 		);
@@ -44,11 +44,11 @@ $('#agregar_otro_pago').click(function(event){
 	}else{
 
 		//Sumar el monto total mas el nuevo agregado
-		$monto_total = parseInt($('#monto_total').text()) + parseInt(monto)
+		$monto_total = parseInt($('#monto_total2').text()) + parseInt(monto)
 
 		//Actualizar el monto
-		$('#monto_total').text($monto_total)
-		$('#total').val($monto_total)
+		$('#monto_total2').text($monto_total)
+		$('#total2').val($monto_total)
 
 	}
 

@@ -38,64 +38,130 @@
 	</div>		
 </div>
 
+
+
 <div class="row">
-	<div class="col l4">
+	<div class="col l12">
 		<div class="card white">
 			<div class="card-content black-text">
 				<div class="row">
-					<div class="col l12">
-						<a class="waves-effect waves-light btn modal-trigger" href="#modal_mensualidades" id="mensualidad" >Mensualidades</a>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col l12">
-						<a class="waves-effect waves-light btn modal-trigger" href="#modal_especiales" id="especial">Pagos Anuales</a>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col l12">
-						<a class="waves-effect waves-light btn modal-trigger" href="#modal_otros" id="otro">Otros</a>
-					</div>
-				</div>
-			</div>	
-		</div>
-	</div>
-	
-	<!-- Formulario que contiene la informacion de los pagos a realizar -->
-	<form action="{{ route('pagos.procesar_pago') }}" method="POST" id="form_recibo">
-		{{ csrf_field() }}
-		<input type="hidden" name="alumno_id" value="{{ $alumno->id }}">
-		<input type="hidden" name="ciclo_escolar" value="{{ $alumno->grado->ciclo_escolar }}" placeholder="" readonly>
-		<div class="col l8">
-			<div class="card white">
-				<div class="card-content black-text">
-					<div class="row">
-						<table class="highlight" id="pagos" name="recibo">
-							<thead>
-								<tr>
-									<th>Concepto</th>
-									<th>Monto</th>
-								</tr>
-							</thead>
-							<tbody name="recibo_pagos">
+			    <div class="col s12">
+			    	<ul class="tabs tabs-fixed-width">
+				        <li class="tab col s3"><a class="active" href="#test1">Mensualidades e Inscripción</a></li>
+				        <li class="tab col s3"><a href="#test2">Otros</a></li>
+
+			      	</ul>
+			    </div>
+				    <div id="test1" class="col l12">
+				    	<br>
+				    	<div class="row">
+				    		<div class="col l4">
+				    			<br>
+				    			<div class="row">
+									<div class="col l12">
+										<a class="waves-effect waves-light btn modal-trigger" href="#modal_mensualidades" id="mensualidad" >Mensualidades</a>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col l12">
+										<a class="waves-effect waves-light btn modal-trigger" href="#modal_especiales" id="especial">Pagos Anuales</a>
+									</div>
+								</div>
+				    		</div>
+
+				    		<div class="col l8">
+				    			<form action="{{ route('pagos.procesar_pago') }}" method="POST" id="form_recibo">
+									{{ csrf_field() }}
+									<input type="hidden" name="alumno_id" value="{{ $alumno->id }}">
+									<input type="hidden" name="ciclo_escolar" value="{{ $alumno->grado->ciclo_escolar }}" placeholder="" readonly>
+									<div class="col l12">
+										<div class="card white hoverable">
+											<div class="card-content black-text">
+												<div class="row">
+													<table class="highlight" id="pagos" name="recibo">
+														<thead>
+															<tr>
+																<th>Concepto</th>
+																<th>Monto</th>
+															</tr>
+														</thead>
+														<tbody name="recibo_pagos">
+															
+														</tbody>
+														<tfoot style="text-align:center" name="recibo_total">
+															
+														</tfoot>
+													</table>
+												</div>
+												<div class="row" id="botones_recibo" style="display:none">
+													<div class="col l6 offset-l6">
+														<a href="#" id="limpiar_recibo" class="btn red darken-4">Limpiar</a>
+														<a id="enviar_recibo" class="btn blue darken-4">Procesar</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+				    		</div>
+				    	</div>
+				    </div>
+
+				    <div id="test2" class="col s12">
+				    	<div class="row">
+							<br>
+							<div class="row">
 								
-							</tbody>
-							<tfoot style="text-align:center" name="recibo_total">
-								
-							</tfoot>
-						</table>
-					</div>
-					<div class="row" id="botones_recibo" style="display:none">
-						<div class="col l6 offset-l6">
-							<a href="#" id="limpiar_recibo" class="btn red darken-4">Limpiar</a>
-							<a id="enviar_recibo" class="btn blue darken-4">Procesar</a>
+								<div class="col l4">
+									<br>
+									<br>
+									<div class="col l12">
+										<a class="waves-effect waves-light btn modal-trigger" href="#modal_otros" id="otro">Otros Pagos</a>
+									</div>
+								</div>
+
+								<div class="col l8">
+									<form action="{{ route('pagos.procesar_pago_otro') }}" method="POST" id="form_recibo2">
+										{{ csrf_field() }}
+										<input type="hidden" name="alumno_id" value="{{ $alumno->id }}">
+										<input type="hidden" name="ciclo_escolar" value="{{ $alumno->grado->ciclo_escolar }}" placeholder="" readonly>
+										<div class="col l12">
+											<div class="card white hoverable">
+												<div class="card-content black-text">
+													<div class="row">
+														<table class="highlight" id="pagos2" name="recibo">
+															<thead>
+																<tr>
+																	<th>Concepto</th>
+																	<th>Monto</th>
+																</tr>
+															</thead>
+															<tbody name="recibo_pagos">
+																
+															</tbody>
+															<tfoot style="text-align:center" name="recibo_total">
+																
+															</tfoot>
+														</table>
+													</div>
+													<div class="row" id="botones_recibo2" style="display:none">
+														<div class="col l6 offset-l6">
+															<a href="#" id="limpiar_recibo2" class="btn red darken-4">Limpiar</a>
+															<a id="enviar_recibo2" class="btn blue darken-4">Procesar</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
+				    </div>
+  				</div>
 			</div>
 		</div>
-	</form>
-
+	</div>
 </div>
 
 @endsection
@@ -110,7 +176,7 @@
     		<div class="input-field col l12">
     			<select id="mes">
     				@foreach ($mensualidades as $mensualidad)
-						<option value="{{ $mensualidad->id }}" mes="{{ $mensualidad->nombre }}" monto="{{ $mensualidad->monto }}">{{ $mensualidad->nombre }} - Q. {{ $mensualidad->monto }}.00
+						<option value="{{ $mensualidad->id }}" mes="{{ $mensualidad->nombre }}" monto="{{ $mensualidad->monto }}">{{ $mensualidad->nombre }} - Q. {{ $mensualidad->monto }}
 						</option>
     				@endforeach
     			</select>
@@ -135,7 +201,7 @@
 						<option value="">No tiene pagos pendientes</option>
 					@else
 						@foreach ($pagos_anuales as $pago_anual)
-							<option value="{{ $pago_anual->id }}" concepto="{{ $pago_anual->nombre }}" monto="{{ $pago_anual->monto }}">{{ $pago_anual->nombre }} - Q. {{ $pago_anual->monto }}.00</option>
+							<option value="{{ $pago_anual->id }}" concepto="{{ $pago_anual->nombre }}" monto="{{ $pago_anual->monto }}">{{ $pago_anual->nombre }} - Q. {{ $pago_anual->monto }}</option>
 						@endforeach	
 					@endif
 							

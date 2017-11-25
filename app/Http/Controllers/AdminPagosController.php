@@ -69,4 +69,30 @@ class AdminPagosController extends Controller
 			'anualidades'		=>		$anualidades
 		]);
 	}
+
+	public function nuevo_pago(Request $request){
+
+		$pago = new Pago();
+		$pago->nombre = $request->nombre;
+		$pago->monto = $request->monto;
+		$pago->grado_pred_id = $request->grado_pred_id;
+		$pago->tipo_pago_id = 1;
+		$pago->save();
+
+		return redirect()->route('admin_pagos.ver_grado', $request->grado_pred_id);
+	}
+
+	public function nuevo_pago_anual(Request $request){
+
+		$pago = new Pago();
+		$pago->nombre = $request->nombre;
+		$pago->monto = $request->monto;
+		$pago->grado_pred_id = $request->grado_pred_id;
+		$pago->tipo_pago_id = 2;
+		$pago->save();
+
+		return redirect()->route('admin_pagos.ver_grado', $request->grado_pred_id);
+	}
+
+
 }

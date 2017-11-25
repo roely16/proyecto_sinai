@@ -9,7 +9,7 @@ class Alumno extends Model
 	 protected $table = 'alumnos';
 
 	 protected $fillable = [
-		'nombre', 'segundo_nombre', 'apellido', 'segundo_apellido', 'edad', 'telefono', 'direccion', 'grado_id', 'sede_id',
+		'nombre', 'segundo_nombre', 'apellido', 'segundo_apellido', 'edad', 'telefono', 'direccion', 'grado_id', 'sede_id', 'descuento',
 	 ];
 
 	 public function grado(){

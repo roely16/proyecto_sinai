@@ -2,12 +2,19 @@
 			
 			event.preventDefault()
 
+			//Colocar la fecha en el campo de texto hidden para ver los detalles de los ingresos
+			$('#ver_detalles_ingresos').val($('#dia').val())
+			$("#div_mes").hide();
+			$("#div_dia").show();
+
 			$.ajax({
 				url: $('#form_reporte_dia').attr('action'),
 				type: 'POST',
 				data: $('#form_reporte_dia').serialize(),
 				success: function(data) {
 					
+					console.log(data)
+
 					var horas = ['07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18']
 
 					var total
@@ -36,7 +43,7 @@
 
 					var sum = totales.reduce(function(a, b) { return a + b; }, 0);
 
-					$('#total_ingresos').text('Total de Ingresos: Q ' + sum);
+					$('#total_ingresos').text('Total de Ingresos: Q ' + sum + ' - Fecha: ' + $('#dia').val());
 
 					$("#div_total_ingresos").show();
 
@@ -101,6 +108,11 @@
 		$('#form_reporte_mes').submit(function(event){
 			event.preventDefault()
 
+			$('#ver_detalle_year').val($('#year').val())
+			$('#ver_detalle_mes').val($('#mes').val())
+			$("#div_dia").hide();
+			$("#div_mes").show();
+
 			$.ajax({
 				url: $('#form_reporte_mes').attr('action'),
 				type: 'POST',
@@ -131,7 +143,7 @@
 
 					var sum = totales.reduce(function(a, b) { return a + b; }, 0);
 
-					$('#total_ingresos').text('Total de Ingresos: Q ' + sum);
+					$('#total_ingresos').text('Total de Ingresos: Q ' + sum + ' - Fecha: ' + $('#year').val() + '/' + $('#mes').val());
 
 					$("#div_total_ingresos").show();
 
@@ -234,4 +246,5 @@
 			});
 
 		})
+
 		

@@ -23,7 +23,8 @@ $("#eliminar").click(function(event) {
 					text: 'El registro ha sido eliminado.',
 					type: 'success'
 				}).then(function(){
-					//window.location.replace("/plataforma/alumnos")
+					console.log(data)
+					//window.location.replace(data)
 				})
 
 			}

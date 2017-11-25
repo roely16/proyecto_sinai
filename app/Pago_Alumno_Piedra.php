@@ -21,4 +21,8 @@ class Pago_Alumno_Piedra extends Model
     {
         return $this->belongsTo('App\Recibo_Piedra');
     }    
+
+    public function alumno(){
+        return $this->belongsTo('App\Alumno');
+    }
 }

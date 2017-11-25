@@ -161,4 +161,41 @@ class PerfilMaestroController extends Controller
 	 	return redirect()->route('maestro.calificar_tarea', $request->tarea_id);
 
 	 }
+
+	 public function eliminar_tarea($id_tarea, $id_curso){
+
+	 	$tarea = Tarea::find($id_tarea);
+
+	 	foreach ($tarea->tareas_alumno as $entrega) {
+
+	 		Storage::delete($entrega->archivo);	
+
+	 	}
+
+	 	$tarea->delete();
+
+	 	return redirect()->route('maestro.ver_curso', $id_curso);
+
+	 }
+
+	public function eliminar_video($id_video, $id_curso){
+
+		$video = Video::find($id_video);
+
+		$video->delete();
+
+		return redirect()->route('maestro.ver_curso', $id_curso);
+	}
+
+	public function eliminar_documento($id_documento, $id_curso){
+
+		$documento = Documento::find($id_documento);
+
+		Storage::delete($documento->archivo);
+
+		$documento->delete();
+
+		return redirect()->route('maestro.ver_curso', $id_curso);
+
+	}
 }

@@ -15,13 +15,13 @@
 	</div>
 
 	<div class="row">
-		<div class="col l6 center">
+		<div class="col l6 ">
 			<h5>Reportes Financieros</h5>
 			<a href="#modal_ingresos_diarios" class="waves-effect waves-light btn modal-trigger">Ingresos diarios</a>
 			<a href="#modal_ingresos_mensuales" class="waves-effect waves-light btn modal-trigger">Ingresos mensuales</a>
 		</div>
-		<div class="col l6 center">
-			<h5 class="center">Reportes Administrativos</h5>
+		<div class="col l6 ">
+			<h5 class="">Reportes Administrativos</h5>
 			<a href="#modal_hoja_asistencia" class="waves-effect waves-light btn modal-trigger">Hoja de Asistencia</a>
 			<!--  	
 			<a href="#modal_alumnos_solventes" class="waves-effect waves-light btn modal-trigger">Alumnos Solventes</a>
@@ -29,18 +29,36 @@
 		</div>
 	</div>
 
+	<br><br>
 	<div class="row" id="div_total_ingresos" style="display:none">
-		<br>
-		<div class="col l6 right">
+		<div class="col l12 ">
 			<p class="flow-text" id="total_ingresos"></p>
 		</div>
+		<div class="col l12 ">
+			<div id="div_dia" style="display: none">
+				<form action="{{ route('reportes.detalles_reporte_dia') }}" method="POST" id="form_detalles_ingresos">
+					{{ csrf_field() }}
+					<input type="hidden" name="fecha_dia" id="ver_detalles_ingresos">
+					<button type="submit" class="btn">Ver Detalle de Ingresos</button>	
+				</form>
+			</div>
+
+			<div id="div_mes" style="display: none">
+				<form action="{{ route('reportes.detalles_reporte_mes') }}" method="POST" id="form_detalles_ingresos">
+					{{ csrf_field() }}
+					<input type="hidden" name="year" id="ver_detalle_year">
+					<input type="hidden" name="mes" id="ver_detalle_mes">
+					<button type="submit" class="btn">Ver Detalle de Ingresos</button>	
+				</form>			
+			</div>
+		</div>
+		
 	</div>
 
 	<div id="grafica">
 		<canvas id="myChart" width="1000" height="300"></canvas>	
 	</div>
 	
-
 @endsection
 
 @section('extras')
@@ -52,7 +70,7 @@
 		      	<h4>Generar Reporte Ingresos Diarios</h4>
 		      	<div class="row">
 		      		<div class="input-field col l12">
-					 	<input type="text" placeholder="" value="" name="dia" class="datepicker" required>
+					 	<input type="text" placeholder="" value="" id="dia" name="dia" class="datepicker" required>
 					 	<label for="">Fecha</label>
 			  		</div>	
 		      	</div>
@@ -70,7 +88,7 @@
 	  			<h4>Generar Reporte Ingresos Mensuales</h4>
 		      	<div class="row">
 		      		<div class="input-field col l6">
-					 	<select name="year" id="" required>
+					 	<select name="year" id="year" required>
 					 		<option value="2017">2017</option>
 					 		<option value="2018">2018</option>
 					 		<option value="2019">2019</option>
@@ -80,7 +98,7 @@
 					 	<label for="">Año</label>
 			  		</div>	
 			  		<div class="input-field col l6">
-					 	<select name="mes" id="" required>
+					 	<select name="mes" id="mes" required>
 					 		<option value="01">Enero</option>
 					 		<option value="02">Febrero</option>
 					 		<option value="03">Marzo</option>
@@ -180,46 +198,7 @@
   		</form>
   	</div>	
 
-
-	<div id="modal_alumnos_solventes" class="modal modal-fixed-footer">
-  		<form action="{{ route('reportes.alumnos_solventes')}}" method="POST">
-  			{{ csrf_field() }}
-  			<div class="modal-content">
-  				<h4>Generar Informe de Solvencias</h4>
-  				<div class="row">
-  					<label for="id_label_single">
-  						Click para seleccionar el grado
  
-	  						<select name="grado_id" class="js-example-basic-single js-states form-control browser-default" style="width: 100%" id="id_label_single" required>
-	  							<option value="" disabled selected>Seleccione un grado</option>
-	  							@foreach ($grados as $grado)
-									
-									<option value="{{ $grado->id }}">
-										{{ $grado->ciclo_escolar }} / 
-										{{ $grado->nombre }} 
-										@if ($grado->nivel_id == 1)
-											Preprimaria / 
-										@elseif($grado->nivel_id == 2)
-											Primaria / 
-										@elseif($grado->nivel_id == 3)
-											Básico /
-										@elseif($grado->nivel_id == 4)
-											Diversificado / 
-										@endif
-										{{ $grado->seccion }}
-									</option>
-								
-	  							@endforeach
-	  						</select>
-						</label>
-  				</div>
-  			</div>
-  			<div class="modal-footer">
-  				<button type="submit" class="modal-action waves-effect waves-green btn-flat">Generar</button>
-  			</div>
-  		</form>
-  	</div>  	
-
 @endsection
 
 @section('scripts_final')
@@ -227,10 +206,5 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.js"></script>
 	<script src="{{ asset('template_platform/js/reportes.js')}}"></script>
-	<script>
-		
-
-
-	</script>
 
 @endsection

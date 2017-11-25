@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Curso_Pred;
 use App\Grado;
+use App\Grado_Pred;
 use App\Curso;
 use App\Nivel;
 
@@ -92,11 +93,27 @@ class CursosPredController extends Controller
     public function destroy($id)
     {
         $curso = Curso_Pred::find($id);
+
+        $cursos = Curso_Pred::where('grado_id', $curso->grado_id)->get();
+
+        $grado = Grado_Pred::find($curso->grado_id);
+
+        $usuario = Auth::user();
+
+        $niveles = Nivel::where('id','>', 0)->with(['grados' => function($query) use ($usuario){
+            $query->where('sede_id', '=', $usuario->empleado->sede_id);
+        }])->get();
+
         $curso->delete();
+
+        return "/plataforma/administracion/cursos_pred/mostrar/".$curso->grado_id;
+
     }
 
-    public function mostrar_cursos(Request $request){
-      $cursos = Curso_Pred::where('grado_id', $request->grado_id)->get();
+    public function mostrar_cursos($id){
+      $cursos = Curso_Pred::where('grado_id', $id)->get();
+
+      $grado = Grado_Pred::find($id);
 
       $usuario = Auth::user();
 
@@ -109,7 +126,8 @@ class CursosPredController extends Controller
         'cursos_lista'  =>  true,
         'cursos'        =>  $cursos,
         'niveles'       =>  $niveles,
-        'grado_'         =>  $request->grado_id
+        'grado_'        =>  $grado->id,
+        'grado_pred'    =>  $grado
       ]);
 
     }
@@ -121,6 +139,8 @@ class CursosPredController extends Controller
 
       //Agregar curso_pred a cursos
       $grados = Grado::where('grado_pred_id', $request->grado_id)->get();
+
+      $grado_pred = Grado_Pred::find($request->grado_id);
 
       $usuario = Auth::user();
 
@@ -136,13 +156,8 @@ class CursosPredController extends Controller
       }
 
       $cursos = Curso_Pred::where('grado_id', $request->grado_id)->paginate(5);
-
-      return view('platform.configuracion_general')->with([
-        'cursos_lista'  =>  true,
-        'cursos'        =>  $cursos,
-        'niveles'       =>  $niveles,
-        'grado_'        =>  $request->grado_id
-      ]);
+   
+      return redirect()->route('cursos_pred.mostrar_cursos', $request->grado_id);
 
     }
 }

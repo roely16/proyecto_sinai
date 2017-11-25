@@ -175,6 +175,7 @@
 		   								<tr>
 		   									<th>Nombre</th>
 		   									<th>Fecha de Entrega</th>
+		   									<th>Estado</th>
 		   									<th>Acción</th>
 		   								</tr>
 		   							</thead>
@@ -184,11 +185,15 @@
 											  		<td>{{ $tarea->nombre }}</td>
 											  		<td>{{ $tarea->fecha_entrega }}</td>
 											  		<td>
-														<a href="{{ route('maestro.entregas_tarea',$tarea->id) }}" class="btn green">
-															<i class="material-icons">assignment</i>
-														</a>
-														<a href="#" class="btn red">
-															<i class="material-icons">delete</i>
+													  	@if ($tarea->tareas_alumno->count())
+													  		Entregada
+													  	@else
+													  		Pendiente
+													  	@endif
+													</td>
+											  		<td>
+														<a href="{{ route('alumno.detalle_tarea',$tarea->id) }}" class="btn">Ver
+															<i class="material-icons right">send</i>
 														</a>
 											  		</td>
 												</tr>

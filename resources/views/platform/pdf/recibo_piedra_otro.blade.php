@@ -35,8 +35,8 @@
 		<td colspan="2">Aldea Piedra Parada Cristo Rey, Santa Catarina Pinula</td>
 	</tr>
 	<tr class="big negrita" style="text-align: center">
-		<td colspan="2" >RECIBO A-{{ $recibo->id }}</td>
-		<td colspan="2" >RECIBO A-{{ $recibo->id }}</td>
+		<td colspan="2" >RECIBO B-{{ $recibo->id }}</td>
+		<td colspan="2" >RECIBO B-{{ $recibo->id }}</td>
 	</tr>
 	<tr>
 		<td colspan="2">Res. Ministerial</td>
