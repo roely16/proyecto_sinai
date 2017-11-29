@@ -10,7 +10,7 @@
 
 	<div class="row">
 		<div class="col l12">
-			<h3 class="center">Módulo de Reportes</h3>
+			<h3 class="center">Módulo de Reportes </h3>
 		</div>
 	</div>
 
