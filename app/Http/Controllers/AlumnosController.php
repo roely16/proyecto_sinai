@@ -30,10 +30,7 @@ class AlumnosController extends Controller
     	
 		public function index()
 		{
-
 				$usuario = Auth::user();
-
-				//dd($usuario->empleado->sede_id);
 
 				$alumnos = Alumno::where('sede_id', '=', $usuario->empleado->sede_id)->orderBy('id', 'DESC')->paginate(5);
 
@@ -43,8 +40,6 @@ class AlumnosController extends Controller
 					}
 					$alumno->sede;
 				}
-
-
 
 				return view('platform.alumnos')->with([
 					'alumnos'             =>  $alumnos,
@@ -317,8 +312,22 @@ class AlumnosController extends Controller
 				return $nuevo_usuario;
 
 			}
-			
 
+		}
+
+		public function obtener_descuento($id){
+			$alumno = Alumno::find($id);
+
+			return $alumno->descuento;
+		}
+
+		public function establecer_descuento(Request $request){
+
+			$alumno = Alumno::find($request->id_alumno);
+			$alumno->descuento = $request->descuento;
+			$alumno->save();
+
+			return redirect()->route('alumnos.show', $request->id_alumno);
 
 		}
 

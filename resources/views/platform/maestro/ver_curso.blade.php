@@ -66,7 +66,9 @@
 														<a title="Calificar Tarea" href="{{ route('maestro.entregas_tarea',$tarea->id) }}" class="btn green">
 															<i class="material-icons">assignment</i>
 														</a>
-
+														<a title="Eliminar Tarea" onclick="return confirm('¿Seguro que desae eliminar la tarea?')" href="{{ route('maestro.eliminar_tarea',['id_tarea' => $tarea->id, 'id_curso' => $curso->id]) }}" class="btn red">
+															<i class="material-icons">delete</i>
+														</a>
 											  		</td>
 												</tr>
 										 	@endforeach
@@ -103,7 +105,9 @@
 														<a title="Calificar Tarea" href="{{ route('maestro.entregas_tarea',$tarea->id) }}" class="btn green">
 															<i class="material-icons">assignment</i>
 														</a>
-														
+														<a title="Eliminar Tarea" onclick="return confirm('¿Seguro que desae eliminar la tarea?')" href="{{ route('maestro.eliminar_tarea',['id_tarea' => $tarea->id, 'id_curso' => $curso->id]) }}" class="btn red">
+															<i class="material-icons">delete</i>
+														</a>
 											  		</td>
 												</tr>
 										 	@endforeach
@@ -140,7 +144,9 @@
 														<a title="Calificar Tarea" href="{{ route('maestro.entregas_tarea',$tarea->id) }}" class="btn green">
 															<i class="material-icons">assignment</i>
 														</a>
-														
+														<a title="Eliminar Tarea" onclick="return confirm('¿Seguro que desae eliminar la tarea?')" href="{{ route('maestro.eliminar_tarea',['id_tarea' => $tarea->id, 'id_curso' => $curso->id]) }}" class="btn red">
+															<i class="material-icons">delete</i>
+														</a>
 											  		</td>
 												</tr>
 										 	@endforeach
@@ -177,7 +183,9 @@
 														<a title="Calificar Tarea" href="{{ route('maestro.entregas_tarea',$tarea->id) }}" class="btn green">
 															<i class="material-icons">assignment</i>
 														</a>
-														
+														<a title="Eliminar Tarea" onclick="return confirm('¿Seguro que desae eliminar la tarea?')" href="{{ route('maestro.eliminar_tarea',['id_tarea' => $tarea->id, 'id_curso' => $curso->id]) }}" class="btn red">
+															<i class="material-icons">delete</i>
+														</a>
 											  		</td>
 												</tr>
 										 	@endforeach
@@ -202,6 +210,7 @@
 			   							<tr>
 			   								<th>Nombre</th>
 			   								<th>Dirección (URL)</th>
+			   								<th>Acción</th>
 			   							</tr>
 			   						</thead>
 			   						<tbody>
@@ -209,6 +218,11 @@
 			   								<tr>
 			   									<td>{{ $video->nombre }}</td>
 			   									<td><a href="{{ $video->url }}" target="_blank">{{ $video->url }}</a></td>
+			   									<td>
+			   										<a title="Eliminar Video" onclick="return confirm('¿Seguro que desae eliminar el video?')" href="{{ route('maestro.eliminar_video',['id_video' => $video->id, 'id_curso' => $curso->id]) }}" class="btn red">
+														<i class="material-icons">delete</i>
+													</a>
+			   									</td>
 			
 			   								</tr>
 			   							@endforeach
@@ -238,7 +252,10 @@
 			   								<tr>
 			   									<td>{{ $documento->nombre }}</td>
 													<td>
-														<a href="{{ Storage::url($documento->archivo) }}" class="btn" download="{{ $documento->nombre_archivo }}"><i class="material-icons">file_download</i></a>
+														<a title="Descargar archivo" href="{{ Storage::url($documento->archivo) }}" class="btn green" download="{{ $documento->nombre_archivo }}"><i class="material-icons">file_download</i></a>
+														<a title="Eliminar Documento" onclick="return confirm('¿Seguro que desae eliminar el documento?')" href="{{ route('maestro.eliminar_documento',['id_documento' => $documento->id, 'id_curso' => $curso->id]) }}" class="btn red">
+															<i class="material-icons">delete</i>
+														</a>
 													</td>			
 			   								</tr>
 			   							@endforeach

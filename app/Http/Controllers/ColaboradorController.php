@@ -160,7 +160,7 @@ class ColaboradorController extends Controller
 
         $colaborador->delete();
 
-        return redirect()->route('colaboradores.index');
+        return "/plataforma/administracion/colaboradores";
     }
 
     public function buscar_colaborador(Request $request){

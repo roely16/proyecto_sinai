@@ -21,4 +21,8 @@ class Pago_Alumno_Inco extends Model
     {
         return $this->belongsTo('App\Recibo_Inco');
     }   
+
+    public function alumno(){
+        return $this->belongsTo('App\Alumno');
+    }
 }

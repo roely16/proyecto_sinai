@@ -9,8 +9,11 @@ use App\Alumno_Encargado;
 use App\Reporte;
 use App\Alumno;
 use App\Pago_Alumno;
+use App\Pago_Alumno_Otro;
 use App\Pago_Alumno_Piedra;
+use App\Pago_Alumno_Piedra_Otro;
 use App\Pago_Alumno_Inco;
+use App\Pago_Alumno_Inco_Otro;
 use App\Pago;
 
 class PerfilEncargadoController extends Controller
@@ -42,6 +45,8 @@ class PerfilEncargadoController extends Controller
             
             	$pagos = Pago_Alumno::where('alumno_id', '=', $alumno->id)->orderBy('id', 'DESC')->get();
 
+            	$otros_pagos = Pago_Alumno_Otro::where('alumno_id', '=', $alumno->id)->orderBy('id', 'DESC')->get();
+
             	$pagos_realizados = Pago_Alumno::where('alumno_id', '=', $alumno->id)->where('pago_id', '!=', null)->pluck('pago_id');
 
 	        }elseif($alumno->sede_id == 2){
@@ -64,7 +69,8 @@ class PerfilEncargadoController extends Controller
 				'reportes'		=>		$reportes,
 				'mensualidades'	=>		$mensualidades,
 				'pagos_anuales'	=>		$pagos_anuales,
-				'pagos_realizados'	=>	$pagos
+				'pagos_realizados'	=>	$pagos,
+				'otros_pagos'	=>		$otros_pagos
 
 			]);
 		}

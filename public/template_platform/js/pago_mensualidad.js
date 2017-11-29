@@ -18,7 +18,7 @@ $('#agregar_mensualidad').click(function(event){
 	$("#pagos").find('tbody')
 		.append($('<tr style="display:none;">')
 			.append($('<td>')
-				.append('<input type="hidden" value="'+ id_mensualidad +'"  name="mensualidad[]" readonly>')
+				.append('<input type="hidden" value="'+ id_mensualidad +'|'+ monto +'"  name="mensualidad[]" readonly>')
 			)
 		)
 

@@ -9,7 +9,7 @@ class Recibo extends Model
     protected $table = 'recibos_canalitos';
 
 	protected $fillable = [
-		'fecha', 'total', 'alumno_id',
+		'fecha', 'total', 'alumno_id', 'serie',
 	];
 
 	public function pagos()

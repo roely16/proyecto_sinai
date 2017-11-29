@@ -160,6 +160,16 @@ Route::group(['prefix' => 'plataforma/administracion'], function(){
 			'as'    =>  'platform.alumnos.buscar_grados_ciclo'
 		]);
 
+		Route::get('alumnos/mostrar/obtener_descuento/{id}', [
+			'uses'  =>  'AlumnosController@obtener_descuento',
+			'as'    =>  'platform.alumnos.obtener_descuento'
+		]);
+
+		Route::post('alumnos/mostrar/establecer_descuento/', [
+			'uses'  =>  'AlumnosController@establecer_descuento',
+			'as'    =>  'platform.alumnos.establecer_descuento'
+		]);
+
 });
 
 //Rutas para el control de pagos 
@@ -167,7 +177,10 @@ Route::get('/plataforma/pagos', 'PagosController@ver_modulo_pagos')->name('pagos
 Route::post('/plataforma/pagos', 'PagosController@buscar_alumno')->name('pagos.buscar_alumno');
 Route::get('/plataforma/pagos/{id}/generar_pago', 'PagosController@generar_pago')->name('pagos.generar_pago');
 Route::get('/plataforma/pagos/{id}/estado_cuenta', 'PagosController@estado_cuenta')->name('pagos.estado_cuenta');
+Route::get('/plataforma/pagos/eliminar_pago/{id}/{id_alumno}', 'PagosController@eliminar_pago')->name('pagos.eliminar_pago');
+Route::get('/plataforma/pagos/eliminar_pago_otro/{id}/{id_alumno}', 'PagosController@eliminar_pago_otro')->name('pagos.eliminar_pago_otro');
 Route::post('/plataforma/pagos/procesar_pago', 'PagosController@procesar_pago')->name('pagos.procesar_pago');
+Route::post('/plataforma/pagos/procesar_pago_otro', 'PagosController@procesar_pago_otro')->name('pagos.procesar_pago_otro');
 
 
 //Rutas para el control de los usuarios
@@ -185,7 +198,7 @@ Route::group(['prefix' => 'plataforma/administracion/'], function(){
 
 Route::group(['prefix' => 'plataforma/administracion/'], function(){
 		Route::resource('cursos_pred', 'CursosPredController');
-		Route::post('cursos_pred/mostrar', [
+		Route::get('cursos_pred/mostrar/{id?}', [
 			'uses'  =>  'CursosPredController@mostrar_cursos',
 			'as'    =>  'cursos_pred.mostrar_cursos'
 		]);
@@ -215,19 +228,38 @@ Route::post('/plataforma/administracion/alumno/encargado/enviar_reporte', 'Encar
 //Rutas para la administracion de los pagos
 Route::get('/plataforma/administracion/admin_pagos', 'AdminPagosController@ver_modulo')->name('admin_pagos.ver_modulo');
 Route::get('/plataforma/administracion/admin_pagos/ver_grado/{id}', 'AdminPagosController@ver_grado')->name('admin_pagos.ver_grado');
+
+Route::post('/plataforma/administracion/admin_pagos/ver_grado/nuevo_pago', 'AdminPagosController@nuevo_pago')->name('admin_pagos.nuevo_pago');
+
+Route::post('/plataforma/administracion/admin_pagos/ver_grado/nuevo_pago_anual', 'AdminPagosController@nuevo_pago_anual')->name('admin_pagos.nuevo_pago_anual');
+
+Route::get('/plataforma/administracion/admin_pagos/ver_grado/editar_pago/{id_pago}/{valor?}', 'PagosController@cambiar_valor_pago')->name('admin_pagos.cambir_valor_pago');
+
 Route::post('/plataforma/administracion/admin_pagos/buscar_grados', 'AdminPagosController@buscar_grados')->name('admin_pagos.buscar_grados');
 
 //Rutas para los reportes
 Route::get('/plataforma/administracion/reportes', 'ReporteController@ver_modulo')->name('reportes.ver_modulo');
+
+Route::post('/plataforma/administracion/reportes/imprimir', 'ReporteController@imprimir_reporte')->name('reportes.imprimir_reporte');
+
 Route::post('/plataforma/administracion/reportes/reporte_dia', 'ReporteController@reporte_dia')->name('reportes.reporte_dia');
 Route::post('/plataforma/administracion/reportes/reporte_mes', 'ReporteController@reporte_mes')->name('reportes.reporte_mes');
 Route::post('/plataforma/administracion/reportes/hoja_asistencia', 'ReporteController@hoja_asistencia')->name('reportes.hoja_asistencia');
-Route::post('/plataforma/administracion/reportes/alumnos_solventes', 'ReporteController@alumnos_solventes')->name('reportes.alumnos_solventes');
+Route::post('/plataforma/administracion/reportes/detalles_reporte_dia', 'ReporteController@detalles_reporte_dia')->name('reportes.detalles_reporte_dia');
+Route::post('/plataforma/administracion/reportes/detalles_reporte_mes', 'ReporteController@detalles_reporte_mes')->name('reportes.detalles_reporte_mes');
+
 
 //Rutas para el perfil de Maestro
 Route::get('/plataforma/maestro/cursos', 'PerfilMaestroController@mis_cursos')->name('maestro.mis_cursos');
 Route::get('/plataforma/maestro/estudiantes', 'PerfilMaestroController@mis_estudiantes')->name('maestro.mis_estudiantes');
 Route::get('/plataforma/maestro/cursos/ver_curso/{id}', 'PerfilMaestroController@ver_curso')->name('maestro.ver_curso');
+
+Route::get('/plataforma/maestro/cursos/ver_curso/eliminar_tarea/{id_tarea}/{id_curso}', 'PerfilMaestroController@eliminar_tarea')->name('maestro.eliminar_tarea');
+
+Route::get('/plataforma/maestro/cursos/ver_curso/eliminar_video/{id_video}/{id_curso}', 'PerfilMaestroController@eliminar_video')->name('maestro.eliminar_video');
+
+Route::get('/plataforma/maestro/cursos/ver_curso/eliminar_documento/{id_documento}/{id_curso}', 'PerfilMaestroController@eliminar_documento')->name('maestro.eliminar_documento');
+
 Route::get('/plataforma/maestro/cursos/ver_curso/entregas_tarea/{id}', 'PerfilMaestroController@entregas_tarea')->name('maestro.entregas_tarea');
 Route::get('/plataforma/maestro/cursos/ver_curso/entregas_tarea/calificar/{id}', 'PerfilMaestroController@calificar_tarea')->name('maestro.calificar_tarea');
 

@@ -35,8 +35,8 @@
 		<td colspan="2">Canton Central, Zona 17 Canalitos</td>
 	</tr>
 	<tr class="big negrita" style="text-align: center">
-		<td colspan="2" >RECIBO No. {{ $recibo->id }}</td>
-		<td colspan="2" >RECIBO No. {{ $recibo->id }}</td>
+		<td colspan="2" >RECIBO A-{{ $recibo->id }}</td>
+		<td colspan="2" >RECIBO A-{{ $recibo->id }}</td>
 	</tr>
 	<tr>
 		<td colspan="2">Res. Ministerial</td>

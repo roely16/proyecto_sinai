@@ -70,8 +70,21 @@
 								@else
 									<input type="text" placeholder="" value="No Inscrito" readonly>
 								@endif
-
 								<label for="">Grado</label>
+							</div>
+							
+							<div class="input-field col l3">
+								@if ($alumno->descuento != 0)
+									<input type="text" placeholder="" value="{{ $alumno->descuento}} %" readonly>
+									<label for="">Descuento</label>
+								@endif
+							</div>
+
+							<div class="col l1 offset-l1">
+								@if ($alumno->grado_id != null)
+									<br>
+									<a id="obtener_descuento" href="{{ route('platform.alumnos.obtener_descuento', $alumno->id)}}" class="btn">Becar</a>
+								@endif
 							</div>
 						</form>
 					</div>
@@ -133,6 +146,26 @@
 @endsection
 
 @section('extras')
+
+<div id="modal_descuento" class="modal">
+	<form action="{{ route('platform.alumnos.establecer_descuento')}}" method="POST">
+		{{ csrf_field() }}
+		<input type="hidden" value="{{ $alumno->id}}" name="id_alumno">
+	    <div class="modal-content">
+	    	<h4 class="center">Establecer Porcentaje de Descuento</h4>
+	    	<div class="row center">
+	    		<div class="col l2 offset-l5">
+	    			<input type="text" name="descuento" id="descuento" style="text-align: center" required>	
+	    		</div>	
+	    	</div>
+			
+	    </div>
+	    <div class="modal-footer">
+	      	<button type="submit" class="modal-action modal-close waves-effect waves-green btn-flat">Establecer</button>
+	    </div>
+    </form>
+ </div>	
+
 <div id="modal_encargado" class="modal modal-fixed-footer">
 
 	<ul class="tabs tabs-fixed-width black-text">
@@ -219,4 +252,21 @@
 @section('scripts_final')
 	<script src="{{ asset('template_platform/js/editar.js') }}"></script>
 	<script src="{{ asset('template_platform/js/eliminar.js') }}"></script>
+
+	<script>
+		$('#obtener_descuento').click(function(event){
+			event.preventDefault()
+
+			$.ajax({
+				url: $(this).attr('href'),
+				type: 'GET',
+				success: function(data) {
+					$('#descuento').val(data)
+					$('#modal_descuento').modal('open');
+				}
+			});
+
+		})
+
+	</script>
 @endsection

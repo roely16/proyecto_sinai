@@ -8,11 +8,17 @@ use Illuminate\Http\Request;
 use App\Alumno;
 use App\Pago;
 use App\Pago_Alumno;
+use App\Pago_Alumno_Otro;
 use App\Pago_Alumno_Piedra;
+use App\Pago_Alumno_Piedra_Otro;
 use App\Pago_Alumno_Inco;
+use App\Pago_Alumno_Inco_Otro;
 use App\Recibo;
+use App\Recibo_Otro;
 use App\Recibo_Piedra;
+use App\Recibo_Piedra_Otro;
 use App\Recibo_Inco;
+use App\Recibo_Inco_Otro;
 
 use Barryvdh\DomPDF\Facade as PDF;
 
@@ -64,6 +70,11 @@ class PagosController extends Controller
 
         $pagos_anuales = Pago::where('grado_pred_id', '=', $alumno->grado->grado_pred_id)->where('tipo_pago_id', '=', 2)->whereNotIn('id', $pagos_realizados)->get();
         
+        if ($alumno->descuento != 0) {
+            foreach ($mensualidades as $mensualidad) {
+                $mensualidad->monto = $mensualidad->monto - ($mensualidad->monto * ($alumno->descuento / 100));
+            }
+        }
 
         return view('platform.pagos.generar_pago')->with([
             'alumno'    =>  $alumno,
@@ -95,9 +106,11 @@ class PagosController extends Controller
                 if (isset($request->mensualidad)) {
 
                     foreach ($request->mensualidad as $mensualidad) {
-                        
+
+                        list($id_mensualidad,$monto) = explode('|', $mensualidad);
+
                         //Se busca la informacion del pago
-                        $pago = Pago::find($mensualidad);
+                        $pago = Pago::find($id_mensualidad);
 
                         $pago_alumno = new Pago_Alumno();
 
@@ -105,7 +118,7 @@ class PagosController extends Controller
 
                         //Se registra la informacion del pago
                         $pago_alumno->concepto = "Mensualidad " .$concepto;
-                        $pago_alumno->monto = $pago->monto;
+                        $pago_alumno->monto = $monto;
                         $pago_alumno->ciclo_escolar = $ciclo_escolar;
                         $pago_alumno->alumno_id = $alumno_id;
                         $pago_alumno->pago_id = $pago->id;
@@ -138,6 +151,7 @@ class PagosController extends Controller
                     }
                 }
 
+                //Procesar moras
                 if (isset($request->concepto_otro)) {
                     
                     $i = 0;
@@ -156,9 +170,9 @@ class PagosController extends Controller
                         $pago_alumno->save();
 
                         $i++;
-
                     }
                 }
+
                 
                 $pagos = Pago_Alumno::where('recibo_id', '=', $recibo->id)->get();
 
@@ -168,7 +182,7 @@ class PagosController extends Controller
                     'pagos'     =>  $pagos
                 ])->setPaper('letter', 'portrait')->setWarnings(false);
 
-                return $pdf->download('recibo'.$recibo->id.'.pdf');
+                return $pdf->download('Recibo A-'.$recibo->id.'.pdf');
 
 
             }elseif($alumno->sede_id == 2){
@@ -185,8 +199,10 @@ class PagosController extends Controller
 
                     foreach ($request->mensualidad as $mensualidad) {
                         
+                        list($id_mensualidad,$monto) = explode('|', $mensualidad);
+
                         //Se busca la informacion del pago
-                        $pago = Pago::find($mensualidad);
+                        $pago = Pago::find($id_mensualidad);
 
                         $pago_alumno = new Pago_Alumno_Piedra();
 
@@ -194,7 +210,7 @@ class PagosController extends Controller
 
                         //Se registra la informacion del pago
                         $pago_alumno->concepto = "Mensualidad " .$concepto;
-                        $pago_alumno->monto = $pago->monto;
+                        $pago_alumno->monto = $monto;
                         $pago_alumno->ciclo_escolar = $ciclo_escolar;
                         $pago_alumno->alumno_id = $alumno_id;
                         $pago_alumno->pago_id = $pago->id;
@@ -227,6 +243,7 @@ class PagosController extends Controller
                     }
                 }
 
+                //Procesar moras
                 if (isset($request->concepto_otro)) {
                     
                     $i = 0;
@@ -245,7 +262,6 @@ class PagosController extends Controller
                         $pago_alumno->save();
 
                         $i++;
-
                     }
                 }
                 
@@ -257,7 +273,7 @@ class PagosController extends Controller
                     'pagos'     =>  $pagos
                 ])->setPaper('letter', 'portrait')->setWarnings(false);
 
-                return $pdf->download('recibo'.$recibo->id.'.pdf');
+                return $pdf->download('Recibo A-'.$recibo->id.'.pdf');
 
             }elseif($alumno->sede_id == 3){
 
@@ -271,9 +287,11 @@ class PagosController extends Controller
                 if (isset($request->mensualidad)) {
 
                     foreach ($request->mensualidad as $mensualidad) {
+
+                        list($id_mensualidad,$monto) = explode('|', $mensualidad);
                         
                         //Se busca la informacion del pago
-                        $pago = Pago::find($mensualidad);
+                        $pago = Pago::find($id_mensualidad);
 
                         $pago_alumno = new Pago_Alumno_Inco();
 
@@ -281,7 +299,7 @@ class PagosController extends Controller
 
                         //Se registra la informacion del pago
                         $pago_alumno->concepto = "Mensualidad " .$concepto;
-                        $pago_alumno->monto = $pago->monto;
+                        $pago_alumno->monto = $monto;
                         $pago_alumno->ciclo_escolar = $ciclo_escolar;
                         $pago_alumno->alumno_id = $alumno_id;
                         $pago_alumno->pago_id = $pago->id;
@@ -314,6 +332,7 @@ class PagosController extends Controller
                     }
                 }
 
+                //Procesar moras
                 if (isset($request->concepto_otro)) {
                     
                     $i = 0;
@@ -332,7 +351,6 @@ class PagosController extends Controller
                         $pago_alumno->save();
 
                         $i++;
-
                     }
                 }
                 
@@ -344,9 +362,139 @@ class PagosController extends Controller
                     'pagos'     =>  $pagos
                 ])->setPaper('letter', 'portrait')->setWarnings(false);
 
-                return $pdf->download('recibo'.$recibo->id.'.pdf');
+                return $pdf->download('Recibo A-'.$recibo->id.'.pdf');
 
             }
+
+    }
+
+    public function procesar_pago_otro(Request $request){
+
+        $alumno_id = $request->alumno_id;
+
+        $alumno = Alumno::find($alumno_id);
+
+        $ciclo_escolar = $request->ciclo_escolar;
+
+        if ($alumno->sede_id == 1) {
+
+            //Crear recibo
+            $recibo = new Recibo_Otro();
+            $recibo->alumno_id = $alumno_id;
+            $recibo->total = $request->total;
+            $recibo->save();   
+
+            if (isset($request->concepto_otro)) {
+                    
+                $i = 0;
+
+                foreach ($request->concepto_otro as $concepto_otro) {
+
+                    $pago_alumno = new Pago_Alumno_Otro();
+
+                    //Se registra la informacion del pago
+                    $pago_alumno->concepto = $concepto_otro;
+                    $pago_alumno->monto = $request->monto_otro[$i];
+                    $pago_alumno->ciclo_escolar = $ciclo_escolar;
+                    $pago_alumno->alumno_id = $alumno_id;
+                    $pago_alumno->recibo_id = $recibo->id;
+
+                    $pago_alumno->save();
+
+                    $i++;
+                }
+            }
+
+            $pagos = Pago_Alumno_Otro::where('recibo_id', '=', $recibo->id)->get();
+
+            $pdf = PDF::loadView('platform.pdf.recibo_otro', [
+                'recibo'    =>  $recibo,
+                'alumno'    =>  $alumno,
+                'pagos'     =>  $pagos
+            ])->setPaper('letter', 'portrait')->setWarnings(false);
+
+            return $pdf->download('Recibo O-'.$recibo->id.'.pdf');
+
+
+        }elseif($alumno->sede_id == 2){
+
+            //Crear recibo Piedra
+            $recibo = new Recibo_Piedra_Otro();
+            $recibo->alumno_id = $alumno_id;
+            $recibo->total = $request->total;
+            $recibo->save();   
+
+            if (isset($request->concepto_otro)) {
+                    
+                $i = 0;
+
+                foreach ($request->concepto_otro as $concepto_otro) {
+
+                    $pago_alumno = new Pago_Alumno_Piedra_Otro();
+
+                    //Se registra la informacion del pago
+                    $pago_alumno->concepto = $concepto_otro;
+                    $pago_alumno->monto = $request->monto_otro[$i];
+                    $pago_alumno->ciclo_escolar = $ciclo_escolar;
+                    $pago_alumno->alumno_id = $alumno_id;
+                    $pago_alumno->recibo_id = $recibo->id;
+
+                    $pago_alumno->save();
+
+                    $i++;
+                }
+            }
+
+            $pagos = Pago_Alumno_Piedra_Otro::where('recibo_id', '=', $recibo->id)->get();
+
+            $pdf = PDF::loadView('platform.pdf.recibo_piedra_otro', [
+                'recibo'    =>  $recibo,
+                'alumno'    =>  $alumno,
+                'pagos'     =>  $pagos
+            ])->setPaper('letter', 'portrait')->setWarnings(false);
+
+            return $pdf->download('Recibo O-'.$recibo->id.'.pdf');
+
+        }elseif($alumno->sede_id == 3){
+
+            //Crear recibo INCO
+            $recibo = new Recibo_Inco_Otro();
+            $recibo->alumno_id = $alumno_id;
+            $recibo->total = $request->total;
+            $recibo->save();   
+
+            if (isset($request->concepto_otro)) {
+                    
+                $i = 0;
+
+                foreach ($request->concepto_otro as $concepto_otro) {
+
+                    $pago_alumno = new Pago_Alumno_Inco_Otro();
+
+                    //Se registra la informacion del pago
+                    $pago_alumno->concepto = $concepto_otro;
+                    $pago_alumno->monto = $request->monto_otro[$i];
+                    $pago_alumno->ciclo_escolar = $ciclo_escolar;
+                    $pago_alumno->alumno_id = $alumno_id;
+                    $pago_alumno->recibo_id = $recibo->id;
+
+                    $pago_alumno->save();
+
+                    $i++;
+                }
+            }
+
+            $pagos = Pago_Alumno_Inco_Otro::where('recibo_id', '=', $recibo->id)->get();
+
+            $pdf = PDF::loadView('platform.pdf.recibo_inco_otro', [
+                'recibo'    =>  $recibo,
+                'alumno'    =>  $alumno,
+                'pagos'     =>  $pagos
+            ])->setPaper('letter', 'portrait')->setWarnings(false);
+
+            return $pdf->download('Recibo O-'.$recibo->id.'.pdf');
+
+        }
 
     }
 
@@ -356,28 +504,129 @@ class PagosController extends Controller
 
         if ($alumno->sede_id == 1) {
             
-            $pagos = Pago_Alumno::where('alumno_id', '=', $alumno->id)->orderBy('id', 'DESC')->paginate(5);
+            $pagos = Pago_Alumno::where('alumno_id', '=', $alumno->id)->orderBy('id', 'DESC')->get();
+
+            $pagos_ = Pago_Alumno_Otro::where('alumno_id', '=', $alumno->id)->orderBy('id', 'DESC')->get();
 
             return view('platform.pagos.estado_cuenta')->with([
                 'alumno'    =>  $alumno,
-                'pagos'     =>  $pagos
+                'pagos'     =>  $pagos,
+                'pagos_'    =>  $pagos_
             ]);
 
         }elseif($alumno->sede_id == 2){
-            $pagos = Pago_Alumno_Piedra::where('alumno_id', '=', $alumno->id)->orderBy('id', 'DESC')->paginate(5);
+            $pagos = Pago_Alumno_Piedra::where('alumno_id', '=', $alumno->id)->orderBy('id', 'DESC')->get();
+
+            $pagos_ = Pago_Alumno_Piedra_Otro::where('alumno_id', '=', $alumno->id)->orderBy('id', 'DESC')->get();
 
             return view('platform.pagos.estado_cuenta')->with([
                 'alumno'    =>  $alumno,
-                'pagos'     =>  $pagos
+                'pagos'     =>  $pagos,
+                'pagos_'    =>  $pagos_
             ]);
         }elseif($alumno->sede_id == 3){
-            $pagos = Pago_Alumno_Inco::where('alumno_id', '=', $alumno->id)->orderBy('id', 'DESC')->paginate(5);
+            $pagos = Pago_Alumno_Inco::where('alumno_id', '=', $alumno->id)->orderBy('id', 'DESC')->get();
 
+            $pagos_ = Pago_Alumno_Inco_Otro::where('alumno_id', '=', $alumno->id)->orderBy('id', 'DESC')->get();            
             return view('platform.pagos.estado_cuenta')->with([
                 'alumno'    =>  $alumno,
-                'pagos'     =>  $pagos
+                'pagos'     =>  $pagos,
+                'pagos_'    =>  $pagos_
+
             ]);
         }
+
+    }
+
+    public function cambiar_valor_pago($id_pago, $valor){
+
+        $pago = Pago::find($id_pago);
+        $pago->monto = $valor;
+        $pago->save();
+
+        return $pago;
+
+    }
+
+    public function eliminar_pago($id, $alumno_id){
+
+        $usuario = Auth::user();
+
+        if ($usuario->empleado->sede_id == 1) {
+
+            $pago = Pago_Alumno::find($id);
+
+            $recibo = Recibo::find($pago->recibo_id);
+            $recibo->total = $recibo->total - $pago->monto;
+            $recibo->save();
+
+            $pago->delete();
+
+        }elseif($usuario->empleado->sede_id == 2){
+
+            $pago = Pago_Alumno_Piedra::find($id);
+
+            $recibo = Recibo_Piedra::find($pago->recibo_id);
+            $recibo->total = $recibo->total - $pago->monto;
+            $recibo->save();
+
+            $pago->delete();
+
+        }elseif($usuario->empleado->sede_id == 3){
+
+            $pago = Pago_Alumno_Inco::find($id);
+
+            $recibo = Recibo_Inco::find($pago->recibo_id);
+            $recibo->total = $recibo->total - $pago->monto;
+            $recibo->save();
+
+            $pago->delete();
+        }
+
+        
+
+        return redirect()->route('pagos.estado_cuenta', $alumno_id);
+
+    }
+
+
+    public function eliminar_pago_otro($id, $alumno_id){
+
+        $usuario = Auth::user();
+
+        if ($usuario->empleado->sede_id == 1) {
+
+            $pago = Pago_Alumno_Otro::find($id);
+
+            $recibo = Recibo_Otro::find($pago->recibo_id);
+            $recibo->total = $recibo->total - $pago->monto;
+            $recibo->save();
+
+            $pago->delete();
+
+        }elseif($usuario->empleado->sede_id == 2){
+
+            $pago = Pago_Alumno_Piedra_Otro::find($id);
+
+            $recibo = Recibo_Piedra_Otro::find($pago->recibo_id);
+            $recibo->total = $recibo->total - $pago->monto;
+            $recibo->save();
+
+            $pago->delete();
+
+        }elseif($usuario->empleado->sede_id == 3){
+
+            $pago = Pago_Alumno_Inco_Otro::find($id);
+
+            $recibo = Recibo_Inco_Otro::find($pago->recibo_id);
+            $recibo->total = $recibo->total - $pago->monto;
+            $recibo->save();
+
+            $pago->delete();
+
+        }
+
+        return redirect()->route('pagos.estado_cuenta', $alumno_id);
 
     }
 }
