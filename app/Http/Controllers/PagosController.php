@@ -150,7 +150,6 @@ class PagosController extends Controller
 
                     }
                 }
-<<<<<<< HEAD
 
                 //Procesar moras
                 if (isset($request->concepto_otro)) {
@@ -173,9 +172,6 @@ class PagosController extends Controller
                         $i++;
                     }
                 }
-
-=======
->>>>>>> fafc38926884afa2e178209e8ccb5cd0855e0d7b
                 
                 $pagos = Pago_Alumno::where('recibo_id', '=', $recibo->id)->get();
 
@@ -185,11 +181,7 @@ class PagosController extends Controller
                     'pagos'     =>  $pagos
                 ])->setPaper('letter', 'portrait')->setWarnings(false);
 
-<<<<<<< HEAD
                 return $pdf->download('Recibo A-'.$recibo->id.'.pdf');
-=======
-                return $pdf->download('recibo A-'.$recibo->id.'.pdf');
->>>>>>> fafc38926884afa2e178209e8ccb5cd0855e0d7b
 
 
             }elseif($alumno->sede_id == 2){
@@ -249,7 +241,6 @@ class PagosController extends Controller
 
                     }
                 }
-<<<<<<< HEAD
 
                 //Procesar moras
                 if (isset($request->concepto_otro)) {
@@ -272,8 +263,6 @@ class PagosController extends Controller
                         $i++;
                     }
                 }
-=======
->>>>>>> fafc38926884afa2e178209e8ccb5cd0855e0d7b
                 
                 $pagos = Pago_Alumno_Piedra::where('recibo_id', '=', $recibo->id)->get();
 
@@ -283,11 +272,9 @@ class PagosController extends Controller
                     'pagos'     =>  $pagos
                 ])->setPaper('letter', 'portrait')->setWarnings(false);
 
-<<<<<<< HEAD
                 return $pdf->download('Recibo A-'.$recibo->id.'.pdf');
-=======
+
                 return $pdf->download('recibo A-'.$recibo->id.'.pdf');
->>>>>>> fafc38926884afa2e178209e8ccb5cd0855e0d7b
 
             }elseif($alumno->sede_id == 3){
 
@@ -360,125 +347,8 @@ class PagosController extends Controller
 
     }
 
-    public function procesar_pago_otro(Request $request){
 
-        $alumno_id = $request->alumno_id;
-
-<<<<<<< HEAD
-                //Procesar moras
-                if (isset($request->concepto_otro)) {
-=======
-        $alumno = Alumno::find($alumno_id);
-
-        $ciclo_escolar = $request->ciclo_escolar;
-
-        if ($alumno->sede_id == 1) {
-
-            //Crear recibo
-            $recibo = new Recibo_Otro();
-            $recibo->alumno_id = $alumno_id;
-            $recibo->total = $request->total;
-            $recibo->save();   
-
-            if (isset($request->concepto_otro)) {
->>>>>>> fafc38926884afa2e178209e8ccb5cd0855e0d7b
-                    
-                $i = 0;
-
-                foreach ($request->concepto_otro as $concepto_otro) {
-
-                    $pago_alumno = new Pago_Alumno_Otro();
-
-                    //Se registra la informacion del pago
-                    $pago_alumno->concepto = $concepto_otro;
-                    $pago_alumno->monto = $request->monto_otro[$i];
-                    $pago_alumno->ciclo_escolar = $ciclo_escolar;
-                    $pago_alumno->alumno_id = $alumno_id;
-                    $pago_alumno->recibo_id = $recibo->id;
-
-                    $pago_alumno->save();
-
-                    $i++;
-                }
-            }
-
-<<<<<<< HEAD
-                        $i++;
-                    }
-=======
-            $pagos = Pago_Alumno_Otro::where('recibo_id', '=', $recibo->id)->get();
-
-            $pdf = PDF::loadView('platform.pdf.recibo_otro', [
-                'recibo'    =>  $recibo,
-                'alumno'    =>  $alumno,
-                'pagos'     =>  $pagos
-            ])->setPaper('letter', 'portrait')->setWarnings(false);
-
-            return $pdf->download('recibo B-'.$recibo->id.'.pdf');
-
-
-        }elseif($alumno->sede_id == 2){
-
-            //Crear recibo Piedra
-            $recibo = new Recibo_Piedra_Otro();
-            $recibo->alumno_id = $alumno_id;
-            $recibo->total = $request->total;
-            $recibo->save();   
-
-            if (isset($request->concepto_otro)) {
-                    
-                $i = 0;
-
-                foreach ($request->concepto_otro as $concepto_otro) {
-
-                    $pago_alumno = new Pago_Alumno_Piedra_Otro();
-
-                    //Se registra la informacion del pago
-                    $pago_alumno->concepto = $concepto_otro;
-                    $pago_alumno->monto = $request->monto_otro[$i];
-                    $pago_alumno->ciclo_escolar = $ciclo_escolar;
-                    $pago_alumno->alumno_id = $alumno_id;
-                    $pago_alumno->recibo_id = $recibo->id;
-
-                    $pago_alumno->save();
-
-                    $i++;
->>>>>>> fafc38926884afa2e178209e8ccb5cd0855e0d7b
-                }
-            }
-
-            $pagos = Pago_Alumno_Piedra_Otro::where('recibo_id', '=', $recibo->id)->get();
-
-            $pdf = PDF::loadView('platform.pdf.recibo_piedra_otro', [
-                'recibo'    =>  $recibo,
-                'alumno'    =>  $alumno,
-                'pagos'     =>  $pagos
-            ])->setPaper('letter', 'portrait')->setWarnings(false);
-
-            return $pdf->download('recibo B-'.$recibo->id.'.pdf');
-
-        }elseif($alumno->sede_id == 3){
-
-            //Crear recibo INCO
-            $recibo = new Recibo_Inco_Otro();
-            $recibo->alumno_id = $alumno_id;
-            $recibo->total = $request->total;
-            $recibo->save();   
-
-            if (isset($request->concepto_otro)) {
-                    
-                $i = 0;
-
-                foreach ($request->concepto_otro as $concepto_otro) {
-
-                    $pago_alumno = new Pago_Alumno_Inco_Otro();
-
-<<<<<<< HEAD
-                return $pdf->download('Recibo A-'.$recibo->id.'.pdf');
-
-            }
-
-    }
+    
 
     public function procesar_pago_otro(Request $request){
 
@@ -583,8 +453,7 @@ class PagosController extends Controller
 
                     $pago_alumno = new Pago_Alumno_Inco_Otro();
 
-=======
->>>>>>> fafc38926884afa2e178209e8ccb5cd0855e0d7b
+
                     //Se registra la informacion del pago
                     $pago_alumno->concepto = $concepto_otro;
                     $pago_alumno->monto = $request->monto_otro[$i];
@@ -606,11 +475,8 @@ class PagosController extends Controller
                 'pagos'     =>  $pagos
             ])->setPaper('letter', 'portrait')->setWarnings(false);
 
-<<<<<<< HEAD
             return $pdf->download('Recibo O-'.$recibo->id.'.pdf');
-=======
-            return $pdf->download('recibo B-'.$recibo->id.'.pdf');
->>>>>>> fafc38926884afa2e178209e8ccb5cd0855e0d7b
+
 
         }
 
