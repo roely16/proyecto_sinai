@@ -33,22 +33,38 @@ $('#agregar_otro_pago').click(function(event){
 		$("#pagos2").find('tfoot')
 			.append($('<tr id="fila_total2">')
 				.append($('<td>')
+<<<<<<< HEAD
 					.append('<input type="hidden" value="'+ monto +'" id="total2" name="total" readonly>')
 					.append('<b>Total a pagar</b>')
 				)
 				.append($('<td id="monto_total2">')
 					.append($('#monto_pago_otro').val())
+=======
+					.append('<input type="hidden" value="'+monto+'" id="total2" name="total" readonly>')
+					.append('<b>Total a pagar</b>')
+				)
+				.append($('<td id="monto_total2">')
+					.append($('#monto_pago').val())
+>>>>>>> fafc38926884afa2e178209e8ccb5cd0855e0d7b
 				)
 		);
 
 	}else{
 
 		//Sumar el monto total mas el nuevo agregado
+<<<<<<< HEAD
 		$monto_total2 = parseInt($('#monto_total2').text()) + parseInt(monto)
 
 		//Actualizar el monto
 		$('#monto_total2').text($monto_total2)
 		$('#total2').val($monto_total2)
+=======
+		$monto_total = parseInt($('#monto_total2').text()) + parseInt(monto)
+
+		//Actualizar el monto
+		$('#monto_total2').text($monto_total)
+		$('#total2').val($monto_total)
+>>>>>>> fafc38926884afa2e178209e8ccb5cd0855e0d7b
 
 	}
 

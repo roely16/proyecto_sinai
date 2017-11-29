@@ -56,6 +56,10 @@
 				    	<br>
 				    	<div class="row">
 				    		<div class="col l4">
+<<<<<<< HEAD
+=======
+				    			<br>
+>>>>>>> fafc38926884afa2e178209e8ccb5cd0855e0d7b
 				    			<div class="row">
 									<div class="col l12">
 										<a class="waves-effect waves-light btn modal-trigger" href="#modal_mensualidades" id="mensualidad" >Mensualidades</a>
@@ -63,11 +67,14 @@
 								</div>
 								<div class="row">
 									<div class="col l12">
+<<<<<<< HEAD
 										<a class="waves-effect waves-light btn modal-trigger" href="#modal_moras" id="mensualidad" >Moras</a>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col l12">
+=======
+>>>>>>> fafc38926884afa2e178209e8ccb5cd0855e0d7b
 										<a class="waves-effect waves-light btn modal-trigger" href="#modal_especiales" id="especial">Pagos Anuales</a>
 									</div>
 								</div>

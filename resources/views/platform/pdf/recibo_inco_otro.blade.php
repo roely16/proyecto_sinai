@@ -35,8 +35,13 @@
 		<td colspan="2">Tel. 5981-2288</td>
 	</tr>
 	<tr class="big negrita" style="text-align: center">
+<<<<<<< HEAD
 		<td colspan="2" >RECIBO O-{{ $recibo->id }}</td>
 		<td colspan="2" >RECIBO O-{{ $recibo->id }}</td>
+=======
+		<td colspan="2" >RECIBO B-{{ $recibo->id }}</td>
+		<td colspan="2" >RECIBO B-{{ $recibo->id }}</td>
+>>>>>>> fafc38926884afa2e178209e8ccb5cd0855e0d7b
 	</tr>
 	<tr>
 		<td colspan="2">Res. Ministerial</td>

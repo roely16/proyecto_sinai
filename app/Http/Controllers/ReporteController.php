@@ -21,7 +21,10 @@ use App\Pago_Alumno_Inco;
 use App\Pago_Alumno_Inco_Otro;
 use App\Pago_Alumno_Piedra;
 use App\Pago_Alumno_Piedra_Otro;
+<<<<<<< HEAD
 
+=======
+>>>>>>> fafc38926884afa2e178209e8ccb5cd0855e0d7b
 use Barryvdh\DomPDF\Facade as PDF;
 
 class ReporteController extends Controller
@@ -56,10 +59,17 @@ class ReporteController extends Controller
 			$horas_otro = Recibo_Otro::whereDate('created_at', $request->dia)->orderBy('created_at', 'ASC')->get()->groupBy(function($val) {
             	
             	return Carbon::parse($val->created_at)->format('H');
+<<<<<<< HEAD
 
             });
 			
 
+=======
+
+            });
+			
+
+>>>>>>> fafc38926884afa2e178209e8ccb5cd0855e0d7b
 			$horas = Recibo::whereDate('created_at', $request->dia)->orderBy('created_at', 'ASC')->get()->groupBy(function($val) {
             	
             	return Carbon::parse($val->created_at)->format('H');
@@ -241,11 +251,16 @@ class ReporteController extends Controller
 
 		return view('platform.reportes.detalles_ingresos')->with([
 			'fecha_reporte'	=>	$request->fecha_dia,
+<<<<<<< HEAD
 			'mes'			=>	'',
 			'year'			=>	'',
 			'pagos'			=>	$pagos,
 			'otros_pagos'	=>	$pagos_,
 			'tipo'			=>	'dia'
+=======
+			'pagos'			=>	$pagos,
+			'otros_pagos'	=>	$pagos_
+>>>>>>> fafc38926884afa2e178209e8ccb5cd0855e0d7b
 		]);
 	}
 
@@ -275,6 +290,7 @@ class ReporteController extends Controller
 
 		return view('platform.reportes.detalles_ingresos')->with([
 			'fecha_reporte'	=>	$request->mes."/".$request->year,
+<<<<<<< HEAD
 			'mes'			=>	$request->mes,
 			'year'			=>	$request->year,
 			'pagos'			=>	$pagos,
@@ -348,6 +364,11 @@ class ReporteController extends Controller
 
         return $pdf->download('Reporte de Ingresos - '.$request->fecha.'.pdf');
        
+=======
+			'pagos'			=>	$pagos,
+			'otros_pagos'	=>	$pagos_
+		]);
+>>>>>>> fafc38926884afa2e178209e8ccb5cd0855e0d7b
 
 	}
 

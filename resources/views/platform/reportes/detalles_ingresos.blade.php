@@ -9,6 +9,7 @@
 @section('content')
 
 	<div class="row">
+<<<<<<< HEAD
 		<div class="col l1">
 			<br>
 			<a href="{{  route('reportes.ver_modulo') }}" class="btn blue-grey darken-4"><i class="material-icons center">arrow_back</i></a>
@@ -26,6 +27,13 @@
 			
 		</div>
 		<div class="col l6">
+=======
+		<div class="col l2">
+			<br>
+			<a href="{{  route('reportes.ver_modulo') }}" class="btn blue-grey darken-4"><i class="material-icons center">arrow_back</i></a>
+		</div>
+		<div class="col l10">
+>>>>>>> fafc38926884afa2e178209e8ccb5cd0855e0d7b
 			<h5 class="right">Reporte de Ingresos - {{ $fecha_reporte }}</h5>
 		</div>
 	</div>
@@ -39,8 +47,13 @@
 	    </div>
 	    <div id="test1" class="col s12">
 	    	<div class="row">
+<<<<<<< HEAD
 				<div class="col l12">					
 					<table class="centered highlight" id="pagos">
+=======
+				<div class="col l12">
+					<table class="centered highlight">
+>>>>>>> fafc38926884afa2e178209e8ccb5cd0855e0d7b
 						<thead>
 							<tr>
 								<th width="35%">Concepto</th>
@@ -87,7 +100,11 @@
 									<td>{{ $pago_->concepto }}</td>
 									<td>Q{{ $pago_->monto }}</td>
 									<td>{{ $pago_->alumno->nombre}} {{ $pago_->alumno->segundo_nombre}} {{ $pago_->alumno->apellido}} {{ $pago_->alumno->segundo_apellido}}</td>
+<<<<<<< HEAD
 									<td>O-{{ $pago_->recibo_id}}</td>
+=======
+									<td>B-{{ $pago_->recibo_id}}</td>
+>>>>>>> fafc38926884afa2e178209e8ccb5cd0855e0d7b
 									<td>{{ $pago_->created_at }}</td>
 								</tr>
 
@@ -98,8 +115,13 @@
 			</div>
 	    </div>
   	</div>
+<<<<<<< HEAD
 @endsection
 
 @section('scripts_final')
+=======
+
+	
+>>>>>>> fafc38926884afa2e178209e8ccb5cd0855e0d7b
 
 @endsection
